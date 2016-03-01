@@ -7,12 +7,30 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var usuario = require('./routes/usuario');
+
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
+
+
+// index page 
+app.get('/', function(req, res) {
+    res.render('pages/index');
+});
+
+app.get('/usuario/login', function(req, res) {
+    res.render('pages/login');
+});
+
+
+app.post('/usuario/login/logar', function(req,res){
+    res.render('usuario/login/logar');
+});
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,6 +42,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
